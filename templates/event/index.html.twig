@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Event index{% endblock %}
+
+{% block body %}
+
+    {% for event in events %}
+        <div class="d-flex mt-5">
+            <div class="card text-white bg-info  mt-5 mx-5" style="max-width: 20rem;">
+                <div class="card-body">
+                    <h4 class="card-title">{{ event.title }}</h4>
+                    <p class="card-text">{{ event.description }}</p>
+                    {% if app.user %}
+                        {% if event.isUserSignedUp(app.user) %}
+                            <a class="btn btn-dark border-danger" href="{{ path('event_signup', {'id':event.id}) }}">participer</a>
+                            {% else %}
+                            <a class="btn btn-dark border-success" href="{{ path('event_signup', {'id':event.id}) }}">se retirer</a>
+                        {% endif %}
+                    {% endif %}
+                    </button>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+
+
+
+{% endblock %}
